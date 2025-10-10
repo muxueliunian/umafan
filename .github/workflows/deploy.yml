@@ -34,7 +34,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           port: ${{ secrets.FTP_PORT || 21 }}
           protocol: ftp
-          server-dir: /www/wwwroot/mxlnuma.space/
+          server-dir: ./ 
           local-dir: dist/
           exclude: |
             **/.git*
