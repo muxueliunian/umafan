@@ -128,10 +128,11 @@ onMounted(() => {
       <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
         <div class="space-y-3">
           <p class="text-xs font-semibold uppercase tracking-[0.4em] text-primary">Uma Fan Data</p>
-          <h1 class="text-3xl font-bold sm:text-4xl">Uma Fan Insights Dashboard</h1>
+          <h1 class="text-3xl font-bold sm:text-4xl">gugugaga🐧的社团粉丝查询网站</h1>
           <p class="max-w-2xl text-xs sm:text-sm text-muted-foreground sm:text-base">
-            Pick a circle and a date range to explore total fan growth, daily momentum, and member performance. All
-            figures are pre-baked from static JSON files so the dashboard works seamlessly on FunctionCat.
+            点这个Circle然后找摩羯设2会就行了，因为用的是之前写的一个网站的模板所以是全英文，不过也不影响所以我懒得改中文了，可能过几天会加一个切换语言的选项，我琢磨琢磨怎么弄
+            <br>.|| <br>
+            \/
           </p>
         </div>
         <div class="flex flex-col items-start gap-3 md:items-end">
