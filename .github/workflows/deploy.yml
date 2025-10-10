@@ -2,7 +2,7 @@ name: Build and Deploy
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -16,28 +16,26 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
-          cache-dependency-path: umafan/package-lock.json
+          node-version: "18"
+          cache: "npm"
+          cache-dependency-path: package-lock.json
 
       - name: Install dependencies
-        working-directory: umafan
         run: npm ci
 
       - name: Build
-        working-directory: umafan
         run: npm run build
 
       - name: Upload via FTP
-        uses: SamKirkland/FTP-Deploy-Action@4.3.5
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           port: ${{ secrets.FTP_PORT || 21 }}
           protocol: ftp
-          server-dir: /www/wwwroot/mxlnuma.space  # 改成宝塔站点根目录
-          local-dir: umafan/dist
+          server-dir: /www/wwwroot/mxlnuma.space/
+          local-dir: dist
           exclude: |
             **/.git*
             **/.github*
