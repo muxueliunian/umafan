@@ -19,7 +19,7 @@ const toggleTheme = () => {
       <div class="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
         <div>
           <p class="text-xs font-semibold uppercase tracking-[0.35em] text-muted-foreground">UmaFan</p>
-          <h1 class="mt-1 text-2xl font-bold sm:text-3xl">UMACLUBFANSDATA</h1>
+          <h1 class="mt-1 text-2xl font-bold sm:text-3xl">UMACLUBFANSDATA🐧</h1>
         </div>
         <Button
           variant="ghost"
