@@ -142,12 +142,12 @@ onMounted(() => {
       </div>
 
       <div class="mt-8 grid gap-6 lg:grid-cols-3">
-        <label class="flex flex-col gap-2 text-sm font-medium text-muted-foreground">
+        <label class="flex w-full flex-col gap-2 text-sm font-medium text-muted-foreground">
           Circle
           <select
             v-model.number="selectedCircleId"
             :disabled="initializing || !circles.length"
-            class="h-11 rounded-xl border-2 border-white/15 bg-background/90 px-4 text-base font-semibold text-foreground outline-none transition hover:border-primary focus:border-primary focus:ring-2 focus:ring-primary/20"
+            class="h-11 w-full rounded-xl border-2 border-white/15 bg-background/90 px-4 text-base font-semibold text-foreground outline-none transition hover:border-primary focus:border-primary focus:ring-2 focus:ring-primary/20"
           >
             <option v-if="!circles.length" value="">No circles available</option>
             <option v-for="circle in circles" :key="circle.id" :value="circle.id">
@@ -155,24 +155,24 @@ onMounted(() => {
             </option>
           </select>
         </label>
-        <label class="flex flex-col gap-2 text-sm font-medium text-muted-foreground">
+        <label class="flex w-full flex-col gap-2 text-sm font-medium text-muted-foreground">
           Start date
           <select
             v-model="selectedStartDate"
             :disabled="initializing || !dates.length"
-            class="h-11 rounded-xl border-2 border-white/15 bg-background/90 px-4 text-base font-semibold text-foreground outline-none transition hover:border-primary focus:border-primary focus:ring-2 focus:ring-primary/20"
+            class="h-11 w-full rounded-xl border-2 border-white/15 bg-background/90 px-4 text-base font-semibold text-foreground outline-none transition hover:border-primary focus:border-primary focus:ring-2 focus:ring-primary/20"
           >
             <option v-for="date in dates" :key="`${date}-start`" :value="date">
               {{ formatDate(date) }}
             </option>
           </select>
         </label>
-        <label class="flex flex-col gap-2 text-sm font-medium text-muted-foreground">
+        <label class="flex w-full flex-col gap-2 text-sm font-medium text-muted-foreground">
           End date
           <select
             v-model="selectedEndDate"
             :disabled="initializing || !dates.length"
-            class="h-11 rounded-xl border-2 border-white/15 bg-background/90 px-4 text-base font-semibold text-foreground outline-none transition hover:border-primary focus:border-primary focus:ring-2 focus:ring-primary/20"
+            class="h-11 w-full rounded-xl border-2 border-white/15 bg-background/90 px-4 text-base font-semibold text-foreground outline-none transition hover:border-primary focus:border-primary focus:ring-2 focus:ring-primary/20"
           >
             <option v-for="date in dates" :key="`${date}-end`" :value="date">
               {{ formatDate(date) }}
