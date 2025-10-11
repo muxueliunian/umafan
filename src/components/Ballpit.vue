@@ -297,7 +297,9 @@ class X {
   }
 
   #onIntersection(entries: IntersectionObserverEntry[]) {
-    this.#isAnimating = entries[0].isIntersecting;
+    const entry = entries[0];
+    if (!entry) return;
+    this.#isAnimating = entry.isIntersecting;
     if (this.#isAnimating) {
       this.#startAnimation();
     } else {
@@ -455,7 +457,9 @@ class W {
       const base = 3 * idx;
       const pos = new Vector3().fromArray(positionData, base);
       const vel = new Vector3().fromArray(velocityData, base);
-      vel.y -= deltaInfo.delta * config.gravity * sizeData[idx];
+      const size = sizeData[idx];
+      if (size === undefined) continue;
+      vel.y -= deltaInfo.delta * config.gravity * size;
       vel.multiplyScalar(config.friction);
       vel.clampLength(0, config.maxVelocity);
       pos.add(vel);
@@ -467,13 +471,16 @@ class W {
       const pos = new Vector3().fromArray(positionData, base);
       const vel = new Vector3().fromArray(velocityData, base);
       const radius = sizeData[idx];
+      if (radius === undefined) continue;
       for (let jdx = idx + 1; jdx < config.count; jdx++) {
         const otherBase = 3 * jdx;
         const otherPos = new Vector3().fromArray(positionData, otherBase);
         const otherVel = new Vector3().fromArray(velocityData, otherBase);
         const diff = new Vector3().copy(otherPos).sub(pos);
         const dist = diff.length();
-        const sumRadius = radius + sizeData[jdx];
+        const otherRadius = sizeData[jdx];
+        if (otherRadius === undefined) continue;
+        const sumRadius = radius + otherRadius;
         if (dist < sumRadius) {
           const overlap = sumRadius - dist;
           const correction = diff.normalize().multiplyScalar(0.5 * overlap);
@@ -491,12 +498,15 @@ class W {
       if (config.controlSphere0) {
         const diff = new Vector3().copy(new Vector3().fromArray(positionData, 0)).sub(pos);
         const d = diff.length();
-        const sumRadius0 = radius + sizeData[0];
-        if (d < sumRadius0) {
-          const correction = diff.normalize().multiplyScalar(sumRadius0 - d);
-          const velCorrection = correction.clone().multiplyScalar(Math.max(vel.length(), 2));
-          pos.sub(correction);
-          vel.sub(velCorrection);
+        const radius0 = sizeData[0];
+        if (radius0 !== undefined) {
+          const sumRadius0 = radius + radius0;
+          if (d < sumRadius0) {
+            const correction = diff.normalize().multiplyScalar(sumRadius0 - d);
+            const velCorrection = correction.clone().multiplyScalar(Math.max(vel.length(), 2));
+            pos.sub(correction);
+            vel.sub(velCorrection);
+          }
         }
       }
       if (Math.abs(pos.x) + radius > config.maxX) {
@@ -767,9 +777,11 @@ class Z extends InstancedMesh {
             const scaled = clamped * (baseColors.length - 1);
             const idx = Math.floor(scaled);
             const start = colorObjects[idx];
+            if (!start) return out;
             if (idx >= baseColors.length - 1) return start.clone();
             const alpha = scaled - idx;
             const end = colorObjects[idx + 1];
+            if (!end) return start.clone();
             out.r = start.r + alpha * (end.r - start.r);
             out.g = start.g + alpha * (end.g - start.g);
             out.b = start.b + alpha * (end.b - start.b);
@@ -793,10 +805,11 @@ class Z extends InstancedMesh {
     this.physics.update(deltaInfo);
     for (let idx = 0; idx < this.count; idx++) {
       U.position.fromArray(this.physics.positionData, 3 * idx);
+      const sphereSize = this.physics.sizeData[idx] ?? 0;
       if (idx === 0 && this.config.followCursor === false) {
         U.scale.setScalar(0);
       } else {
-        U.scale.setScalar(this.physics.sizeData[idx]);
+        U.scale.setScalar(sphereSize);
       }
       U.updateMatrix();
       this.setMatrixAt(idx, U.matrix);
