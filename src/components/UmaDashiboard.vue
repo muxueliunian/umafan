@@ -21,6 +21,12 @@ const optionsReady = ref(false)
 
 const numberFormatter = new Intl.NumberFormat("en-US")
 
+//获取具体日期 day
+const date:Date = new Date();
+const day:number = date.getDate();
+
+
+
 const hasOverview = computed(() => Boolean(overview.value))
 const metrics = computed(() => overview.value?.metrics ?? {
   fansTotalGrowth: 0,
@@ -101,7 +107,7 @@ function initialize() {
 
     if (options.dates.length) {
       selectedEndDate.value = options.dates[options.dates.length - 1] ?? ""
-      const startIndex = Math.max(0, options.dates.length - 7)
+      const startIndex = Math.max(0, options.dates.length - day)
       selectedStartDate.value = options.dates[startIndex] ?? ""
     }
 

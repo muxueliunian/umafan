@@ -50,12 +50,6 @@ const toggleTheme = () => {
           to="/"
           class="rounded-[999px] bg-white px-10 py-4 text-base font-semibold text-slate-900 shadow-[0_10px_35px_rgba(255,255,255,0.15)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_45px_rgba(255,255,255,0.2)]"  
         >Back to HOME</router-link>
-      <CircularGugugaga
-          text="🐧🐧gugugaga!🐧🐧🐧🐧🐧🐧🐧🐧"
-          :spin-duration="20"
-          on-hover="speedUp"
-          class-name="text-blue-500"
-        />
       </header>
       <main class="mx-auto w-full max-w-6xl px-6 py-10">
         <UmaDashboard />
@@ -65,6 +59,12 @@ const toggleTheme = () => {
           <span>gugugaga!🐧🐧🐧</span>
           <span>🐧🐧🐧gugugaga!</span>
         </div>
+        <CircularGugugaga
+          text="🐧🐧gugugaga!🐧🐧🐧🐧🐧🐧🐧🐧"
+          :spin-duration="20"
+          on-hover="speedUp"
+          class-name="text-blue-500"
+        />
       </footer>
     </div>
   </div>
