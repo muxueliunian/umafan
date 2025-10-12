@@ -144,6 +144,7 @@ onMounted(() => {
         <div class="flex flex-col items-start gap-3 md:items-end">
           <span class="rounded-full border border-white/15 px-4 py-1 text-xs font-semibold tracking-[0.3em] text-muted-foreground">{{ activeCircleName }}</span>
           <span class="text-xs sm:text-sm text-muted-foreground">Current range: <strong class="font-semibold text-foreground">{{ selectedRangeLabel }}</strong></span>
+          <span>伊邪那マリカさんのアイデア提供に感謝いたします!</span>
         </div>
       </div>
 
