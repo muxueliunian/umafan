@@ -5,7 +5,8 @@ import { SunIcon, MoonIcon } from "lucide-vue-next"
 import { Button } from "@/components/ui/button"
 import UmaDashboard from "@/components/UmaDashiboard.vue"
 import CircularGugugaga from "@/components/CircularGugugaga.vue"
-import Ballpit from "@/components/Ballpit.vue"
+import Particles from "@/components/Particles.vue"
+// import Ballpit from "@/components/Ballpit.vue" // 暂时注释
 
 const colorMode = useColorMode()
 const isDark = computed(() => colorMode.value === "dark")
@@ -17,19 +18,25 @@ const toggleTheme = () => {
 
 <template>
   <div class="relative">
-    <!-- 全屏背景容器 -->
+    <!-- 🎨 背景组件区域 - Particles 白色极简风格 -->
     <div class="fixed inset-0 -z-10 bg-gradient-to-br from-slate-950 to-slate-900">
-      <Ballpit
-        :count="150"
-        :gravity="0.3"
-        :colors="[0x0ea5e9, 0x6366f1, 0xa855f7]"
-        :ambientIntensity="0.5"
-        :lightIntensity="100"
-        class-name="opacity-25 mix-blend-screen"
+      <Particles
+        :particle-count="500"
+        :particle-spread="10"
+        :speed="0.15"
+        :particle-colors="['#ffffff', '#f0f0f0', '#e0e0e0']"
+        :move-particles-on-hover="false"
+        :particle-hover-factor="1"
+        :alpha-particles="true"
+        :particle-base-size="90"
+        :size-randomness="1"
+        :camera-distance="20"
+        :disable-rotation="false"
+        class-name="w-full h-full opacity-100"
       />
     </div>
-    <div class="relative z-10 backdrop-blur-[1px]">
-      <header class="sticky top-0 z-40 border-b border-white/10 bg-background/80 backdrop-blur">
+    <div class="relative z-10">
+      <header class="sticky top-0 z-40 border-b border-white/10 bg-background/95">
       <div class="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
         <div>
           <p class="text-xs font-semibold uppercase tracking-[0.35em] text-muted-foreground">UmaFan</p>
@@ -38,7 +45,7 @@ const toggleTheme = () => {
         <Button
           variant="ghost"
           size="icon"
-          class="rounded-full border border-white/10 bg-background/70 shadow-lg backdrop-blur"
+          class="rounded-full border border-white/10 bg-background/90 shadow-lg"
           aria-label="Toggle theme"
           @click="toggleTheme"
         >
@@ -54,7 +61,7 @@ const toggleTheme = () => {
       <main class="mx-auto w-full max-w-6xl px-6 py-10">
         <UmaDashboard />
       </main>
-      <footer class="border-t border-white/10 bg-background/70 py-6 text-sm text-muted-foreground">
+      <footer class="border-t border-white/10 bg-background/95 py-6 text-sm text-muted-foreground">
         <div class="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-3 px-6 text-center sm:flex-row sm:text-left">
           <span>gugugaga!🐧🐧🐧</span>
           <span>🐧🐧🐧gugugaga!</span>

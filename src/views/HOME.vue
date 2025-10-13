@@ -1,20 +1,21 @@
 <template>
   <div class="relative min-h-screen overflow-hidden bg-[#000000] text-slate-100">
-    
 
+    <!-- 🎨 背景组件区域 - Particles 白色极简风格 -->
     <div class="absolute inset-0">
-      <RippleGrid
-        grid-color="#27ff64"
-        :grid-size="20"
-        :grid-thickness="10"
-        :fade-distance="1.6"
-        :vignette-strength="6"
-        :opacity="0.9"
-        :ripple-intensity="0.05"
-        :glow-intensity="0.8"
-        :mouse-interaction="true"
-        :mouse-interaction-radius="0.5"
-
+      <Particles
+        :particle-count="500"
+        :particle-spread="12"
+        :speed="0.15"
+        :particle-colors="['#ffffff', '#f0f0f0', '#e0e0e0']"
+        :move-particles-on-hover="false"
+        :particle-hover-factor="1"
+        :alpha-particles="true"
+        :particle-base-size="150"
+        :size-randomness="1.2"
+        :camera-distance="20"
+        :disable-rotation="false"
+        class-name="w-full h-full opacity-100"
       />
     </div>
 
@@ -33,12 +34,27 @@
       class="relative z-10 mx-auto flex min-h-[calc(100vh-160px)] w-full max-w-5xl flex-col items-center justify-center gap-10 px-6 pb-40 pt-28 text-center"
     >
       <div class="space-y-6">
-        <p class="text-xs uppercase tracking-[0.45em] text-slate-300/80">🐧gugu and gaga !🐧</p>
-        <h1 class="text-4xl font-semibold leading-tight text-slate-50 sm:text-5xl lg:text-6xl">
-          GUGU🐧💕 and GAGA🐧❤️ change the world 🌍🌎🌏!
+        <p class="text-xs uppercase tracking-[0.45em] text-slate-300/80">🐧 muxueliunian · mxlnuma.com 🐧</p>
+        <h1 class="flex flex-wrap items-center justify-center gap-4 text-4xl font-semibold leading-tight text-slate-50 sm:text-5xl lg:text-6xl">
+          <span>Creative</span>
+          <RotatingText
+            :texts="[
+              'coding',
+              'components',
+              'experiences',
+              'solutions',
+              'dashboards'
+            ]"
+            :rotation-interval="2500"
+            :stagger-duration="0.03"
+            stagger-from="first"
+            split-by="characters"
+            main-class-name="inline-flex"
+            element-level-class-name="inline-block bg-gradient-to-r from-[#27ff64] to-[#00d9ff] bg-clip-text text-transparent font-bold"
+          />
         </h1>
         <p class="mx-auto max-w-2xl text-base text-slate-300 sm:text-lg">
-          ling gan gu li gu li gua ca lin gan gu ling gan gu !
+          Building innovative web applications with passion · UMA Fan Data · gugugaga! 🐧
         </p>
       </div>
       <div class="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
@@ -53,15 +69,18 @@
           作者的QQ空间
         </button>
       </div>
+
     </main>
 
   </div>
 </template>
 
 <script setup lang="ts">
-import RippleGrid from '@/components/RippleGrid.vue';
+// import RippleGrid from '@/components/RippleGrid.vue'; // 暂时注释
+import Particles from '@/components/Particles.vue';
 import CardNav from '@/components/CardNav.vue';
 import logo from '../image/gugugaga.svg';
+import RotatingText from '@/components/RotatingText.vue';
 
 const items = [
   {
