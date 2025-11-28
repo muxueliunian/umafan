@@ -1,6 +1,6 @@
 ﻿<script setup lang="ts">
 import { computed, onMounted, ref, watch } from "vue"
-import UmaDataChart from "./UmaDataChart.vue"
+// import UmaDataChart from "./UmaDataChart.vue"
 
 import { getUmaOptions, getUmaOverview, type CircleOption, type UmaOverview } from "@/umafan/dataLoader"
 import { ElSelect, ElOption } from 'element-plus'
@@ -40,7 +40,7 @@ const metrics = computed(() => overview.value?.metrics ?? {
   activityStatus: "Pending",
   activityNote: "Data not loaded yet"
 })
-const chartData = computed(() => overview.value?.chart ?? { dates: [], totalFans: [], dailyNewFans: [] })
+// const chartData = computed(() => overview.value?.chart ?? { dates: [], totalFans: [], dailyNewFans: [] })
 const tableRows = computed(() => overview.value?.table ?? [])
 const activeCircleName = computed(
   () => circles.value.find((item) => item.id === selectedCircleId.value)?.name ?? "No circle selected"
