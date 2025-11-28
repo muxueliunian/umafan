@@ -39,8 +39,11 @@ const renderChart = () => {
     backgroundColor: "transparent",
     tooltip: {
       trigger: "axis",
-      confine: true, // 限制在图表区域内
+      confine: true,
+      backgroundColor: "rgba(15, 23, 42, 0.9)", // slate-950
+      borderColor: "rgba(255, 255, 255, 0.1)",
       textStyle: {
+        color: "#f1f5f9", // slate-100
         fontSize: isMobile ? 11 : 14
       }
     },
@@ -48,39 +51,54 @@ const renderChart = () => {
       data: ["Total Fans", "Daily New Fans"],
       top: 0,
       textStyle: {
+        color: "#94a3b8", // slate-400
         fontSize: isMobile ? 10 : 12
       },
       itemWidth: isMobile ? 20 : 25,
-      itemHeight: isMobile ? 12 : 14
+      itemHeight: isMobile ? 12 : 14,
+      inactiveColor: "#475569" // slate-600
     },
     grid: {
       top: isMobile ? 42 : 48,
       right: isMobile ? 10 : 32,
       bottom: isMobile ? 30 : 48,
       left: isMobile ? 10 : 60,
-      containLabel: true // 确保标签不被裁剪
+      containLabel: true,
+      borderColor: "rgba(255, 255, 255, 0.1)"
     },
     xAxis: {
       type: "category",
       data: props.chartData.dates,
       boundaryGap: false,
+      axisLine: {
+        lineStyle: {
+          color: "rgba(255, 255, 255, 0.1)"
+        }
+      },
       axisLabel: {
+        color: "#94a3b8", // slate-400
         fontSize: isMobile ? 9 : 12,
-        rotate: isMobile ? 45 : 0, // 移动端旋转标签
-        interval: isMobile ? 'auto' : 0 // 移动端自动间隔
+        rotate: isMobile ? 45 : 0,
+        interval: isMobile ? 'auto' : 0
       }
     },
     yAxis: [
       {
         type: "value",
-        name: isMobile ? "" : "Total Fans", // 移动端隐藏轴标题
+        name: isMobile ? "" : "Total Fans",
         nameTextStyle: {
+          color: "#94a3b8", // slate-400
           fontSize: isMobile ? 10 : 12
         },
+        splitLine: {
+          lineStyle: {
+            color: "rgba(255, 255, 255, 0.05)"
+          }
+        },
         axisLabel: {
+          color: "#94a3b8", // slate-400
           fontSize: isMobile ? 9 : 12,
           formatter: (value: number) => {
-            // 移动端使用简化数字格式
             if (isMobile && value >= 1000) {
               return (value / 1000).toFixed(0) + 'K'
             }
@@ -94,9 +112,14 @@ const renderChart = () => {
         position: "right",
         alignTicks: true,
         nameTextStyle: {
+          color: "#94a3b8", // slate-400
           fontSize: isMobile ? 10 : 12
         },
+        splitLine: {
+          show: false
+        },
         axisLabel: {
+          color: "#94a3b8", // slate-400
           fontSize: isMobile ? 9 : 12,
           formatter: (value: number) => {
             if (isMobile && value >= 1000) {
@@ -113,8 +136,15 @@ const renderChart = () => {
         type: "line",
         smooth: true,
         data: props.chartData.totalFans,
-        lineStyle: { width: isMobile ? 2 : 3 },
-        showSymbol: false
+        lineStyle: { width: isMobile ? 2 : 3, color: "#3b82f6" }, // blue-500
+        itemStyle: { color: "#3b82f6" },
+        showSymbol: false,
+        areaStyle: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            { offset: 0, color: "rgba(59, 130, 246, 0.3)" },
+            { offset: 1, color: "rgba(59, 130, 246, 0.0)" }
+          ])
+        }
       },
       {
         name: "Daily New Fans",
@@ -122,13 +152,14 @@ const renderChart = () => {
         yAxisIndex: 1,
         data: props.chartData.dailyNewFans,
         itemStyle: {
+          color: "#a855f7", // purple-500
           borderRadius: [6, 6, 0, 0]
         },
-        barWidth: isMobile ? '60%' : '70%' // 移动端调整柱状图宽度
+        barWidth: isMobile ? '60%' : '70%'
       }
     ]
   }
-  chartInstance.setOption(option, true) // notMerge: true 完全替换配置
+  chartInstance.setOption(option, true)
 }
 
 const disposeChart = () => {
@@ -180,10 +211,10 @@ watch(
   margin: 0;
   padding: clamp(80px, 35vw, 120px) 0;
   text-align: center;
-  color: #64748b;
-  border: 2px dashed #cbd5f5;
+  color: #94a3b8; /* slate-400 */
+  border: 2px dashed rgba(255, 255, 255, 0.1);
   border-radius: 16px;
-  background: rgba(148, 163, 184, 0.08);
+  background: rgba(255, 255, 255, 0.02);
 }
 </style>
 

@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.3.2",
     "@tailwindcss/vite": "^4.1.13",
     "@types/three": "^0.180.0",
     "@vueuse/core": "^13.9.0",

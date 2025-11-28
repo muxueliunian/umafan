@@ -38,37 +38,52 @@
   --color-card: var(--card);
   --color-foreground: var(--foreground);
   --color-background: var(--background);
+
   @keyframes accordion-down {
-  from {
-    height: 0;
+    from {
+      height: 0;
     }
-  to {
-    height: var(--reka-accordion-content-height);
+
+    to {
+      height: var(--reka-accordion-content-height);
     }
   }
+
   @keyframes accordion-up {
-  from {
-    height: var(--reka-accordion-content-height);
+    from {
+      height: var(--reka-accordion-content-height);
     }
-  to {
-    height: 0;
+
+    to {
+      height: 0;
     }
   }
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px)
-;
+  --radius-xl: calc(var(--radius) + 4px);
+
   @keyframes accordion-down {
-  from {
-    height: 0;}
-  to {
-    height: var(--reka-accordion-content-height);}}
+    from {
+      height: 0;
+    }
+
+    to {
+      height: var(--reka-accordion-content-height);
+    }
+  }
+
   @keyframes accordion-up {
-  from {
-    height: var(--reka-accordion-content-height);}
-  to {
-    height: 0;}}}
+    from {
+      height: var(--reka-accordion-content-height);
+    }
+
+    to {
+      height: 0;
+    }
+  }
+}
 
 :root {
   --sidebar: oklch(0.984 0.003 247.858);
@@ -145,11 +160,16 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     font-family: 'Poppins', 'Noto Sans SC', 'Inter', 'Segoe UI', sans-serif;
     @apply bg-background text-foreground antialiased;
   }
-  h1, h2, h3, h4 {
+
+  h1,
+  h2,
+  h3,
+  h4 {
     font-family: 'Poppins', 'Inter', 'Segoe UI', sans-serif;
     font-weight: 700;
   }
@@ -198,12 +218,10 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.1),
-      transparent
-    );
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent);
     animation: shimmer-slide 3s ease-in-out infinite;
   }
 }
@@ -214,6 +232,7 @@
     transform: translateY(60px) translateZ(0);
     filter: blur(8px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0) translateZ(0);
@@ -227,9 +246,11 @@
     transform: translateY(30px) scale(0.92) translateZ(0);
     filter: blur(4px);
   }
+
   60% {
     transform: translateY(-5px) scale(1.02) translateZ(0);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0) scale(1) translateZ(0);
@@ -238,21 +259,27 @@
 }
 
 @keyframes glow-pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 20px rgba(91, 91, 214, 0.3),
-                0 0 40px rgba(91, 91, 214, 0.1);
+      0 0 40px rgba(91, 91, 214, 0.1);
   }
+
   50% {
     box-shadow: 0 0 30px rgba(91, 91, 214, 0.5),
-                0 0 60px rgba(91, 91, 214, 0.2),
-                0 0 80px rgba(91, 91, 214, 0.1);
+      0 0 60px rgba(91, 91, 214, 0.2),
+      0 0 80px rgba(91, 91, 214, 0.1);
   }
 }
 
 @keyframes float-subtle {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px) translateZ(0);
   }
+
   50% {
     transform: translateY(-10px) translateZ(0);
   }
@@ -262,6 +289,7 @@
   0% {
     left: -100%;
   }
+
   100% {
     left: 100%;
   }
@@ -269,6 +297,10 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;}
+    @apply border-border outline-ring/50;
+  }
+
   body {
-    @apply bg-background text-foreground;}}
+    @apply bg-background text-foreground;
+  }
+}

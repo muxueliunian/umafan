@@ -11,8 +11,8 @@ const router = createRouter({
             component: Home
         },
         {
-            path: '/dashiboard',
-            name: 'dashiboard',
+            path: '/dashboard',
+            name: 'dashboard',
             component: UmaDashboard
         }
     ]

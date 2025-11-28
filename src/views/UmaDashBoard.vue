@@ -1,80 +1,59 @@
 <script setup lang="ts">
-import { computed } from "vue"
-import { useColorMode } from "@vueuse/core"
-import { SunIcon, MoonIcon } from "lucide-vue-next"
-import { Button } from "@/components/ui/button"
-import UmaDashboard from "@/components/UmaDashiboard.vue"
-import CircularGugugaga from "@/components/CircularGugugaga.vue"
+import UmaDashboard from "@/components/UmaDashboard.vue"
 import Particles from "@/components/Particles.vue"
-// import Ballpit from "@/components/Ballpit.vue" // 暂时注释
-
-const colorMode = useColorMode()
-const isDark = computed(() => colorMode.value === "dark")
-
-const toggleTheme = () => {
-  colorMode.value = isDark.value ? "light" : "dark"
-}
+import { ArrowLeft } from "lucide-vue-next"
 </script>
 
 <template>
-  <div class="relative">
-    <!-- 🎨 背景组件区域 - Particles 白色极简风格 -->
-    <div class="fixed inset-0 -z-10 bg-gradient-to-br from-slate-950 to-slate-900">
+  <div class="relative min-h-screen w-full overflow-x-hidden bg-[#020617] text-slate-100 font-sans selection:bg-primary/30">
+    
+    <!-- 🌌 背景组件区域 -->
+    <div class="fixed inset-0 z-0 pointer-events-none">
       <Particles
-        :particle-count="500"
+        :particle-count="300"
         :particle-spread="10"
-        :speed="0.15"
-        :particle-colors="['#ffffff', '#f0f0f0', '#e0e0e0']"
+        :speed="0.1"
+        :particle-colors="['#ffffff', '#60a5fa', '#c084fc']"
         :move-particles-on-hover="false"
         :particle-hover-factor="1"
         :alpha-particles="true"
-        :particle-base-size="90"
+        :particle-base-size="100"
         :size-randomness="1"
         :camera-distance="20"
         :disable-rotation="false"
-        class-name="w-full h-full opacity-100"
+        class-name="w-full h-full opacity-40"
       />
+      <!-- 氛围光晕 -->
+      <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-600/10 blur-[120px]"></div>
+      <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-purple-600/10 blur-[120px]"></div>
     </div>
-    <div class="relative z-10">
-      <header class="sticky top-0 z-40 border-b border-white/10 bg-background/95">
-      <div class="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
-        <div>
-          <p class="text-xs font-semibold uppercase tracking-[0.35em] text-muted-foreground">UmaFan</p>
-          <h1 class="mt-1 text-2xl font-bold sm:text-3xl">UMACLUBFANSDATA🐧</h1>
-        </div>
-        <Button
-          variant="ghost"
-          size="icon"
-          class="rounded-full border border-white/10 bg-background/90 shadow-lg"
-          aria-label="Toggle theme"
-          @click="toggleTheme"
-        >
-          <MoonIcon v-if="colorMode === 'light'" class="h-5 w-5" />
-          <SunIcon v-else class="h-5 w-5" />
-        </Button>
-      </div>
-      <router-link 
-          to="/"
-          class="rounded-[999px] bg-white px-10 py-4 text-base font-semibold text-slate-900 shadow-[0_10px_35px_rgba(255,255,255,0.15)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_45px_rgba(255,255,255,0.2)]"  
-        >Back to HOME</router-link>
-      </header>
-      <main class="mx-auto w-full max-w-6xl px-6 py-10">
-        <UmaDashboard />
-      </main>
-      <footer class="border-t border-white/10 bg-background/95 py-6 text-sm text-muted-foreground">
-        <div class="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-3 px-6 text-center sm:flex-row sm:text-left">
-          <span>gugugaga!🐧🐧🐧</span>
-          <span>🐧🐧🐧gugugaga!</span>
-        </div>
-        <CircularGugugaga
-          text="🐧🐧gugugaga!🐧🐧🐧🐧🐧🐧🐧🐧"
-          :spin-duration="20"
-          on-hover="speedUp"
-          class-name="text-blue-500"
-        />
-      </footer>
-    </div>
-  </div>
 
-    
+    <!-- 🧭 顶部导航栏 -->
+    <header class="sticky top-0 z-50 w-full border-b border-white/5 bg-[#020617]/60 backdrop-blur-xl">
+      <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <router-link 
+          to="/"
+          class="flex items-center gap-2 text-sm font-medium text-slate-300 transition-colors hover:text-white"
+        >
+          <ArrowLeft class="h-4 w-4" />
+          <span>Back to Home</span>
+        </router-link>
+        
+        <div class="flex items-center gap-2">
+          <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 shadow-lg shadow-blue-500/20">
+            <span class="text-lg font-bold text-white">D</span>
+          </div>
+          <span class="hidden text-lg font-bold tracking-tight sm:inline-block bg-gradient-to-r from-slate-100 to-slate-400 bg-clip-text text-transparent">
+            Dashboard
+          </span>
+        </div>
+      </div>
+    </header>
+
+    <!-- 📦 主要内容区 -->
+    <main class="relative z-10 mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <UmaDashboard />
+    </main>
+
+  </div>
 </template>
