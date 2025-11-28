@@ -55,7 +55,7 @@
             class="flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-1.5 text-xs font-bold text-white shadow-lg shadow-blue-500/30 transition-transform active:scale-95 lg:hidden"
           >
             <DataAnalysis class="h-4 w-4" />
-            <span>查数据</span>
+            <span>查社团粉丝数据</span>
           </button>
 
           <button class="hidden rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-slate-300 transition-colors hover:bg-white/10 hover:text-white sm:block">
@@ -97,10 +97,16 @@
               class="group relative flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/5 transition-all duration-300 hover:-translate-y-1 hover:border-blue-500/30 hover:bg-white/[0.07] hover:shadow-[0_0_30px_-10px_rgba(59,130,246,0.3)]"
             >
               <!-- 图片占位 -->
-              <div class="aspect-video w-full overflow-hidden bg-slate-800/50 relative">
+              <div class="aspect-video w-full overflow-hidden bg-slate-800/50 relative group-hover:scale-105 transition-transform duration-500">
+                <img 
+                  v-if="item.image" 
+                  :src="item.image" 
+                  :alt="item.title"
+                  class="h-full w-full object-cover transition-transform duration-300"
+                />
                 <div class="absolute inset-0 bg-gradient-to-t from-[#020617] to-transparent opacity-60"></div>
-                <!-- 模拟图片内容 -->
-                <div class="absolute inset-0 flex items-center justify-center text-slate-600">
+                <!-- 模拟图片内容 (无图片时显示) -->
+                <div v-if="!item.image" class="absolute inset-0 flex items-center justify-center text-slate-600">
                   <span class="text-4xl opacity-20">🖼️</span>
                 </div>
                 <!-- 标签 -->
@@ -177,15 +183,15 @@ const mobileMenuOpen = ref(false)
 
 // 模拟数据
 const guideList = ref([
-  { title: '短距离育成速通指南（2025版）', time: 8, category: '新手', tags: ['#短距离', '#事件选择'] },
-  { title: '中距离稳定育成策略：如何平衡耐力与速度', time: 10, category: '进阶', tags: ['#中距离'] },
-  { title: '差し战术细节与配队分析', time: 7, category: '进阶', tags: ['#差し'] },
-  { title: 'URA 模拟：关键事件选择速查表', time: 5, category: '工具', tags: ['#事件表'] },
-  { title: '本期活动攻略：积分兑换优先级推荐', time: 6, category: '实用', tags: ['#活动'] },
-  { title: '新手卡组：低练度也能S+的可行搭配', time: 9, category: '新手', tags: ['#卡组'] },
-  { title: '长距离耐力管理与回复技能解析', time: 8, category: '进阶', tags: ['#长距离'] },
-  { title: '速度/根性平衡点讨论：新剧本环境下的最优解', time: 8, category: '理论', tags: ['#养成'] },
-  { title: '全角色适性与加成图鉴速查', time: 4, category: '资料', tags: ['#图鉴'] },
+  { title: '如何成为一名可爱的男娘：从零开始的入门指南', time: 15, category: '新手', tags: ['#入门', '#心态'], image: '/covers/1.jpg' },
+  { title: '伪声技巧进阶：如何练出自然的少女音', time: 20, category: '进阶', tags: ['#伪声', '#声音'], image: '/covers/2.jpg' },
+  { title: '妆容教程：日常系清透底妆与眼妆画法', time: 12, category: '实用', tags: ['#化妆', '#美妆'], image: '/covers/3.jpg' },
+  { title: '服装搭配：挑选适合自己身型的裙装', time: 10, category: '新手', tags: ['#穿搭', '#服饰'], image: '/covers/4.jpg' },
+  { title: '体态管理：如何举手投足更有少女感', time: 18, category: '进阶', tags: ['#体态', '#气质'], image: '/covers/5.jpg' },
+  { title: '假发护理与佩戴：让假发看起来像真发', time: 8, category: '工具', tags: ['#假发', '#护理'], image: '/covers/6.jpg' },
+  { title: '男娘的自我修养：心理建设与自信培养', time: 25, category: '理论', tags: ['#心理', '#自信'], image: '/covers/7.jpg' },
+  { title: '漫展游场指南：注意事项与社交礼仪', time: 10, category: '实用', tags: ['#漫展', '#社交'], image: '/covers/8.jpg' },
+  { title: '好物推荐：那些相见恨晚的变美神器', time: 5, category: '资料', tags: ['#种草', '#好物'], image: '/covers/9.jpg' },
 ])
 
 // --- 侧边栏内容组件 ---
@@ -211,7 +217,7 @@ const SidebarContent = defineComponent({
               ),
               h('div', [
                 h('div', { class: 'text-sm font-bold text-white' }, '粉丝数据查询'),
-                h('div', { class: 'text-[10px] text-blue-100/80' }, '实时追踪社团排名')
+                h('div', { class: 'text-[10px] text-blue-100/80' }, '实时追踪社团粉丝数据')
               ])
             ]),
             h(ArrowRight, { class: 'h-4 w-4 text-white/70 transition-transform group-hover:translate-x-1' })
@@ -245,14 +251,14 @@ const SidebarContent = defineComponent({
           h('div', { class: 'flex gap-3' }, [
             h('div', { class: 'h-12 w-12 shrink-0 rounded-lg bg-slate-800' }), // 占位图
             h('div', [
-              h('h4', { class: 'text-sm font-medium text-slate-200 line-clamp-2' }, '新剧本"U.A.F."速报：剧本机制详解'),
+              h('h4', { class: 'text-sm font-medium text-slate-200 line-clamp-2' }, '新剧本"Onsen"速报：剧本机制详解'),
               h('span', { class: 'text-xs text-slate-500' }, '2 hours ago')
             ])
           ]),
           h('div', { class: 'flex gap-3' }, [
             h('div', { class: 'h-12 w-12 shrink-0 rounded-lg bg-slate-800' }), 
             h('div', [
-              h('h4', { class: 'text-sm font-medium text-slate-200 line-clamp-2' }, '冠军杯赛程公布：准备工作清单'),
+              h('h4', { class: 'text-sm font-medium text-slate-200 line-clamp-2' }, 'Onsen杯唉唉真的要复活了吗？ <-快来看看他是怎么说的'),
               h('span', { class: 'text-xs text-slate-500' }, '5 hours ago')
             ])
           ])

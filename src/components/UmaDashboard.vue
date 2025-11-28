@@ -286,6 +286,7 @@ onMounted(() => {
     </section>
 
     <!-- 📈 趋势图表 -->
+    <!--
     <section v-if="hasOverview" class="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl sm:p-8">
       <div class="mb-6 flex items-center justify-between">
         <h2 class="text-lg font-bold text-white">Fan Trends</h2>
@@ -295,6 +296,7 @@ onMounted(() => {
         <UmaDataChart :chart-data="chartData" />
       </div>
     </section>
+    -->
 
     <!-- 🏆 排行榜 -->
     <section v-if="hasOverview" class="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl sm:p-8">
@@ -345,62 +347,86 @@ onMounted(() => {
 </template>
 
 <style>
-/* ElementPlus Select 玻璃风格 */
-.el-select-glass .el-input__wrapper {
+/* ElementPlus Select 玻璃风格 - 使用 CSS 变量覆盖 */
+.el-select-glass {
+  --el-fill-color-blank: rgba(0, 0, 0, 0.3) !important;
+  --el-text-color-regular: #f1f5f9 !important; /* slate-100 */
+  --el-text-color-placeholder: #94a3b8 !important; /* slate-400 */
+  --el-border-color: rgba(255, 255, 255, 0.15) !important;
+  --el-border-color-hover: #3b82f6 !important; /* blue-500 */
+  --el-disabled-bg-color: rgba(0, 0, 0, 0.2) !important;
+  --el-disabled-text-color: rgba(148, 163, 184, 0.5) !important;
+  --el-disabled-border-color: rgba(255, 255, 255, 0.05) !important;
+  width: 100%;
+}
+
+.el-select-glass .el-select__wrapper {
   height: 44px;
   border-radius: 12px;
-  border: 2px solid rgba(255, 255, 255, 0.15) !important;
-  background-color: rgba(0, 0, 0, 0.3) !important;
-  backdrop-filter: blur(10px);
   box-shadow: none !important;
-  padding: 0 16px;
+  background-color: var(--el-fill-color-blank);
+  border: 2px solid var(--el-border-color);
+  backdrop-filter: blur(10px);
+  padding: 8px 16px;
   transition: all 0.2s;
 }
 
-.el-select-glass .el-input__wrapper:hover {
-  border-color: #3b82f6 !important; /* blue-500 */
-  background-color: rgba(255, 255, 255, 0.05) !important;
+/* Element Plus 2.3+ uses .el-select__wrapper instead of .el-input__wrapper for the new select design */
+.el-select-glass .el-select__wrapper:hover {
+  border-color: var(--el-border-color-hover);
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
-.el-select-glass .el-input.is-focus .el-input__wrapper,
-.el-select-glass.is-focus .el-input__wrapper {
-  border-color: #3b82f6 !important; /* blue-500 */
-  background-color: rgba(255, 255, 255, 0.08) !important;
+.el-select-glass .el-select__wrapper.is-focused {
+  border-color: #3b82f6 !important;
+  background-color: rgba(255, 255, 255, 0.08);
   box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2) !important;
 }
 
+/* 兼容旧版结构 (以防万一) */
+.el-select-glass .el-input__wrapper {
+  height: 44px;
+  border-radius: 12px;
+  box-shadow: none !important;
+  background-color: var(--el-fill-color-blank) !important;
+  border: 2px solid var(--el-border-color) !important;
+  backdrop-filter: blur(10px);
+  padding: 0 16px;
+}
+
+.el-select-glass .el-input__wrapper:hover {
+  border-color: var(--el-border-color-hover) !important;
+}
+
 .el-select-glass .el-input__inner {
-  color: #f1f5f9 !important; /* slate-100 */
-  font-size: 14px;
+  color: var(--el-text-color-regular) !important;
   font-weight: 500;
 }
 
-.el-select-glass .el-input__inner::placeholder {
-  color: #94a3b8; /* slate-400 */
-}
-
-.el-select-glass .el-input__suffix {
-  color: #94a3b8; /* slate-400 */
-}
-
 /* 下拉面板 */
+.el-select-glass-popper {
+  --el-bg-color-overlay: rgba(15, 23, 42, 0.95) !important; /* slate-950 */
+  --el-border-color-light: rgba(255, 255, 255, 0.1) !important;
+  --el-text-color-primary: #cbd5e1 !important; /* slate-300 */
+  --el-fill-color-light: rgba(255, 255, 255, 0.05) !important; /* hover bg */
+}
+
 .el-select-glass-popper.el-popper {
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background-color: rgba(15, 23, 42, 0.95) !important; /* slate-950 */
+  background-color: var(--el-bg-color-overlay) !important;
+  border: 1px solid var(--el-border-color-light) !important;
   backdrop-filter: blur(20px);
   border-radius: 12px;
 }
 
 .el-select-glass-popper .el-select-dropdown__item {
-  color: #cbd5e1; /* slate-300 */
-  font-size: 14px;
+  color: var(--el-text-color-primary);
   padding: 10px 20px;
   height: auto;
 }
 
 .el-select-glass-popper .el-select-dropdown__item.hover,
 .el-select-glass-popper .el-select-dropdown__item:hover {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: var(--el-fill-color-light);
   color: #fff;
 }
 
@@ -410,21 +436,14 @@ onMounted(() => {
   background-color: rgba(59, 130, 246, 0.15);
 }
 
-/* 搜索框样式 */
+/* 搜索框样式 (如果在下拉框中启用过滤) */
 .el-select-glass-popper .el-input__wrapper {
   background-color: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: none !important;
 }
 
 .el-select-glass-popper .el-input__inner {
   color: #fff;
-}
-
-/* 禁用态 */
-.el-select-glass .is-disabled .el-input__wrapper {
-  opacity: 0.5;
-  cursor: not-allowed;
-  background-color: rgba(0, 0, 0, 0.2);
 }
 </style>
