@@ -165,14 +165,14 @@ onMounted(() => {
       </div>
 
       <!-- 筛选器 -->
-      <div class="mt-8 grid gap-6 lg:grid-cols-3">
+      <div class="mt-8 grid gap-4 grid-cols-3">
         <label class="flex w-full flex-col gap-2 text-xs font-medium uppercase tracking-wider text-slate-500">
-          Circle
+          <span class="truncate">Circle</span>
           <el-select
             v-model="selectedCircleId"
             :disabled="initializing || !circles.length"
             filterable
-            placeholder="Select circle..."
+            placeholder="Circle"
             size="large"
             class="w-full el-select-glass"
             popper-class="el-select-glass-popper"
@@ -181,17 +181,17 @@ onMounted(() => {
               <el-option
                 v-if="circle.id != null"
                 :value="circle.id"
-                :label="`${circle.name} (ID: ${circle.id})`"
+                :label="`${circle.name}`"
               />
             </template>
           </el-select>
         </label>
         <label class="flex w-full flex-col gap-2 text-xs font-medium uppercase tracking-wider text-slate-500">
-          Start date
+          <span class="truncate">Start</span>
           <el-select
             v-model="selectedStartDate"
             :disabled="initializing || !dates.length"
-            placeholder="Select start date..."
+            placeholder="Start"
             size="large"
             class="w-full el-select-glass"
             popper-class="el-select-glass-popper"
@@ -205,11 +205,11 @@ onMounted(() => {
           </el-select>
         </label>
         <label class="flex w-full flex-col gap-2 text-xs font-medium uppercase tracking-wider text-slate-500">
-          End date
+          <span class="truncate">End</span>
           <el-select
             v-model="selectedEndDate"
             :disabled="initializing || !dates.length"
-            placeholder="Select end date..."
+            placeholder="End"
             size="large"
             class="w-full el-select-glass"
             popper-class="el-select-glass-popper"
@@ -262,26 +262,26 @@ onMounted(() => {
     </div>
 
     <!-- 📊 核心指标 -->
-    <section v-if="hasOverview" class="grid gap-4 md:grid-cols-3">
-      <div class="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 transition-all hover:-translate-y-1 hover:border-blue-500/30">
+    <section v-if="hasOverview" class="grid gap-2 grid-cols-3">
+      <div class="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-2 sm:p-6 transition-all hover:-translate-y-1 hover:border-blue-500/30">
         <div class="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-blue-500/10 blur-2xl transition-all group-hover:bg-blue-500/20"></div>
-        <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Total Growth</p>
-        <h3 class="mt-2 text-3xl font-black text-white">{{ formatNumber(metrics.fansTotalGrowth) }}</h3>
-        <p class="mt-2 text-xs text-slate-400">Fans gained in selected period</p>
+        <p class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-500 truncate">Total Growth</p>
+        <h3 class="mt-1 sm:mt-2 text-[10px] sm:text-3xl font-black text-white truncate tracking-tighter leading-tight">{{ formatNumber(metrics.fansTotalGrowth) }}</h3>
+        <p class="mt-1 sm:mt-2 text-[10px] sm:text-xs text-slate-400 truncate">Fans gained</p>
       </div>
       
-      <div class="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 transition-all hover:-translate-y-1 hover:border-purple-500/30">
+      <div class="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-2 sm:p-6 transition-all hover:-translate-y-1 hover:border-purple-500/30">
         <div class="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-purple-500/10 blur-2xl transition-all group-hover:bg-purple-500/20"></div>
-        <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Daily New</p>
-        <h3 class="mt-2 text-3xl font-black text-white">{{ formatNumber(metrics.todayNewFans) }}</h3>
-        <p class="mt-2 text-xs text-slate-400">New fans today</p>
+        <p class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-500 truncate">Daily New</p>
+        <h3 class="mt-1 sm:mt-2 text-[10px] sm:text-3xl font-black text-white truncate tracking-tighter leading-tight">{{ formatNumber(metrics.todayNewFans) }}</h3>
+        <p class="mt-1 sm:mt-2 text-[10px] sm:text-xs text-slate-400 truncate">New fans today</p>
       </div>
 
-      <div class="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 transition-all hover:-translate-y-1 hover:border-emerald-500/30">
+      <div class="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-2 sm:p-6 transition-all hover:-translate-y-1 hover:border-emerald-500/30">
         <div class="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-emerald-500/10 blur-2xl transition-all group-hover:bg-emerald-500/20"></div>
-        <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Status</p>
-        <h3 class="mt-2 text-2xl font-bold text-white">{{ metrics.activityStatus }}</h3>
-        <p class="mt-2 text-xs text-slate-400">{{ metrics.activityNote }}</p>
+        <p class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-500 truncate">Status</p>
+        <h3 class="mt-1 sm:mt-2 text-[10px] sm:text-2xl font-bold text-white truncate tracking-tighter leading-tight">{{ metrics.activityStatus }}</h3>
+        <p class="mt-1 sm:mt-2 text-[10px] sm:text-xs text-slate-400 truncate">{{ metrics.activityNote }}</p>
       </div>
     </section>
 
@@ -367,20 +367,8 @@ onMounted(() => {
   background-color: var(--el-fill-color-blank);
   border: 2px solid var(--el-border-color);
   backdrop-filter: blur(10px);
-  padding: 8px 16px;
+  padding: 8px 12px; /* 减少 padding 以适应小空间 */
   transition: all 0.2s;
-}
-
-/* Element Plus 2.3+ uses .el-select__wrapper instead of .el-input__wrapper for the new select design */
-.el-select-glass .el-select__wrapper:hover {
-  border-color: var(--el-border-color-hover);
-  background-color: rgba(255, 255, 255, 0.05);
-}
-
-.el-select-glass .el-select__wrapper.is-focused {
-  border-color: #3b82f6 !important;
-  background-color: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2) !important;
 }
 
 /* 兼容旧版结构 (以防万一) */
@@ -391,7 +379,7 @@ onMounted(() => {
   background-color: var(--el-fill-color-blank) !important;
   border: 2px solid var(--el-border-color) !important;
   backdrop-filter: blur(10px);
-  padding: 0 16px;
+  padding: 0 12px; /* 减少 padding */
 }
 
 .el-select-glass .el-input__wrapper:hover {

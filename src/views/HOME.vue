@@ -90,7 +90,7 @@
           </div>
 
           <!-- 卡片网格 -->
-          <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
+          <div class="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-2 xl:grid-cols-3">
             <article 
               v-for="(item, index) in guideList" 
               :key="index"
@@ -153,11 +153,28 @@
     </main>
 
     <!-- 📱 移动端抽屉菜单 -->
-    <div v-if="mobileMenuOpen" class="fixed inset-0 z-50 lg:hidden">
-      <!-- 遮罩 -->
-      <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" @click="mobileMenuOpen = false"></div>
-      <!-- 抽屉内容 -->
-      <div class="absolute right-0 top-0 h-full w-80 border-l border-white/10 bg-[#0b1121] p-6 shadow-2xl">
+    <!-- 遮罩 -->
+    <Transition
+      enter-active-class="transition-opacity duration-300 ease-out"
+      enter-from-class="opacity-0"
+      enter-to-class="opacity-100"
+      leave-active-class="transition-opacity duration-200 ease-in"
+      leave-from-class="opacity-100"
+      leave-to-class="opacity-0"
+    >
+      <div v-if="mobileMenuOpen" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm lg:hidden" @click="mobileMenuOpen = false"></div>
+    </Transition>
+
+    <!-- 抽屉内容 -->
+    <Transition
+      enter-active-class="transition duration-300 ease-out"
+      enter-from-class="translate-x-full"
+      enter-to-class="translate-x-0"
+      leave-active-class="transition duration-200 ease-in"
+      leave-from-class="translate-x-0"
+      leave-to-class="translate-x-full"
+    >
+      <div v-if="mobileMenuOpen" class="fixed inset-y-0 right-0 z-50 w-80 border-l border-white/10 bg-[#0b1121] p-6 shadow-2xl lg:hidden">
         <div class="mb-8 flex items-center justify-between">
           <span class="text-lg font-bold text-white">Menu</span>
           <button @click="mobileMenuOpen = false" class="rounded-full p-2 text-slate-400 hover:bg-white/10 hover:text-white">
@@ -166,7 +183,7 @@
         </div>
         <SidebarContent />
       </div>
-    </div>
+    </Transition>
 
   </div>
 </template>
