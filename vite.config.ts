@@ -3,6 +3,9 @@ import type { MinifyOptions } from "terser"
 import { defineConfig } from "vite"
 import vue from "@vitejs/plugin-vue"
 import tailwindcss from "@tailwindcss/vite"
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 const terserOptions: MinifyOptions = {
   compress: {
@@ -13,7 +16,16 @@ const terserOptions: MinifyOptions = {
 
 export default defineConfig({
   base: "./",
-  plugins: [vue(), tailwindcss()],
+  plugins: [
+    vue(),
+    tailwindcss(),
+    AutoImport({
+      resolvers: [ElementPlusResolver()],
+    }),
+    Components({
+      resolvers: [ElementPlusResolver()],
+    }),
+  ],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src")
@@ -23,8 +35,9 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          vue: ["vue"],
+          vue: ["vue", "vue-router"],
           echarts: ["echarts"],
+          element: ["element-plus"],
           ui: ["@vueuse/core", "lucide-vue-next", "reka-ui"]
         }
       }

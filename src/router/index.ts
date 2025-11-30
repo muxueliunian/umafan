@@ -1,6 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '@/views/HOME.vue'
-import UmaDashboard from '@/views/UmaDashBoard.vue'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -8,7 +6,7 @@ const router = createRouter({
         {
             path: '/',
             name: 'home',
-            component: Home,
+            component: () => import('@/views/HOME.vue'),
             meta: {
                 title: 'UmaFan - 赛马娘攻略与数据查询中心'
             }
@@ -16,7 +14,7 @@ const router = createRouter({
         {
             path: '/dashboard',
             name: 'dashboard',
-            component: UmaDashboard,
+            component: () => import('@/views/UmaDashBoard.vue'),
             meta: {
                 title: '粉丝数据查询 - UmaFan Dashboard'
             }

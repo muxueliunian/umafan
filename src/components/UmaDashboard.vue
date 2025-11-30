@@ -3,8 +3,8 @@ import { computed, onMounted, ref, watch } from "vue"
 // import UmaDataChart from "./UmaDataChart.vue"
 
 import { getUmaOptions, getUmaOverview, type CircleOption, type UmaOverview } from "@/umafan/dataLoader"
-import { ElSelect, ElOption } from 'element-plus'
-import 'element-plus/dist/index.css'
+// import { ElSelect, ElOption } from 'element-plus'
+// import 'element-plus/dist/index.css'
 
 
 
