@@ -200,15 +200,15 @@ const mobileMenuOpen = ref(false)
 
 // 模拟数据
 const guideList = ref([
-  { title: '如何成为一名可爱的男娘：从零开始的入门指南', time: 15, category: '新手', tags: ['#入门', '#心态'], image: '/covers/1.jpg' },
-  { title: '伪声技巧进阶：如何练出自然的少女音', time: 20, category: '进阶', tags: ['#伪声', '#声音'], image: '/covers/2.jpg' },
-  { title: '妆容教程：日常系清透底妆与眼妆画法', time: 12, category: '实用', tags: ['#化妆', '#美妆'], image: '/covers/3.jpg' },
-  { title: '服装搭配：挑选适合自己身型的裙装', time: 10, category: '新手', tags: ['#穿搭', '#服饰'], image: '/covers/4.jpg' },
-  { title: '体态管理：如何举手投足更有少女感', time: 18, category: '进阶', tags: ['#体态', '#气质'], image: '/covers/5.jpg' },
-  { title: '假发护理与佩戴：让假发看起来像真发', time: 8, category: '工具', tags: ['#假发', '#护理'], image: '/covers/6.jpg' },
-  { title: '男娘的自我修养：心理建设与自信培养', time: 25, category: '理论', tags: ['#心理', '#自信'], image: '/covers/7.jpg' },
-  { title: '漫展游场指南：注意事项与社交礼仪', time: 10, category: '实用', tags: ['#漫展', '#社交'], image: '/covers/8.jpg' },
-  { title: '好物推荐：那些相见恨晚的变美神器', time: 5, category: '资料', tags: ['#种草', '#好物'], image: '/covers/9.jpg' },
+  { title: '赛马娘育成入门：属性优先级、训练选择与休息节奏', time: 14, category: '新手', tags: ['#育成', '#训练', '#入门'], image: '/covers/1.jpg' },
+  { title: '因子系统详解：三星因子怎么刷？继承与配种思路', time: 18, category: '机制', tags: ['#因子', '#继承', '#配种'], image: '/covers/2.jpg' },
+  { title: '支援卡选择指南：速/耐/力/根/智配置与借卡要点', time: 16, category: '卡组', tags: ['#支援卡', '#编成', '#借卡'], image: '/covers/3.jpg' },
+  { title: '技能搭配与取舍：金技能优先级、白技性价比与联动', time: 12, category: '进阶', tags: ['#技能', '#加速', '#终盘'], image: '/covers/4.jpg' },
+  { title: '距离/跑法基础：短距离到长距离、逃先差追怎么选', time: 11, category: '基础', tags: ['#跑法', '#距离', '#适性'], image: '/covers/5.jpg' },
+  { title: '赛事规划：关键比赛时间表、目标赛与保G1策略', time: 9, category: '实用', tags: ['#赛事', '#G1', '#规划'], image: '/covers/6.jpg' },
+  { title: '关键数值门槛：不同距离常见毕业面板与速度线参考', time: 10, category: '数据', tags: ['#面板', '#阈值', '#配速'], image: '/covers/7.jpg' },
+  { title: '对人杯/竞技场思路：环境读盘、阵容模板与克制点', time: 15, category: '对战', tags: ['#对人杯', '#竞技场', '#环境'], image: '/covers/8.jpg' },
+  { title: '常见翻车点排查：训练不来人、体力管理、出战失误', time: 7, category: '排错', tags: ['#翻车', '#育成', '#优化'], image: '/covers/9.jpg' },
 ])
 
 // --- 侧边栏内容组件 ---
