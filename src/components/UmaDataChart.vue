@@ -34,29 +34,43 @@ const renderChart = () => {
 
   // 检测是否为移动设备
   const isMobile = window.innerWidth < 640
+  
+  // Uma Colors
+  const colors = {
+    turf: '#69C05B',
+    ura: '#FF8EA9',
+    text: '#334155', // slate-700
+    subtext: '#94a3b8', // slate-400
+    grid: '#e2e8f0', // slate-200
+    tooltipBg: 'rgba(255, 255, 255, 0.95)',
+    tooltipBorder: '#e2e8f0'
+  }
 
   const option: echarts.EChartsOption = {
     backgroundColor: "transparent",
     tooltip: {
       trigger: "axis",
       confine: true,
-      backgroundColor: "rgba(15, 23, 42, 0.9)", // slate-950
-      borderColor: "rgba(255, 255, 255, 0.1)",
+      backgroundColor: colors.tooltipBg,
+      borderColor: colors.tooltipBorder,
       textStyle: {
-        color: "#f1f5f9", // slate-100
-        fontSize: isMobile ? 11 : 14
-      }
+        color: colors.text,
+        fontSize: isMobile ? 11 : 14,
+        fontWeight: 'bold'
+      },
+      extraCssText: 'box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); border-radius: 8px;'
     },
     legend: {
       data: ["Total Fans", "Daily New Fans"],
       top: 0,
       textStyle: {
-        color: "#94a3b8", // slate-400
-        fontSize: isMobile ? 10 : 12
+        color: colors.text,
+        fontSize: isMobile ? 10 : 12,
+        fontWeight: 'bold'
       },
       itemWidth: isMobile ? 20 : 25,
       itemHeight: isMobile ? 12 : 14,
-      inactiveColor: "#475569" // slate-600
+      inactiveColor: "#cbd5e1" // slate-300
     },
     grid: {
       top: isMobile ? 42 : 48,
@@ -64,7 +78,7 @@ const renderChart = () => {
       bottom: isMobile ? 30 : 48,
       left: isMobile ? 10 : 60,
       containLabel: true,
-      borderColor: "rgba(255, 255, 255, 0.1)"
+      borderColor: colors.grid
     },
     xAxis: {
       type: "category",
@@ -72,14 +86,15 @@ const renderChart = () => {
       boundaryGap: false,
       axisLine: {
         lineStyle: {
-          color: "rgba(255, 255, 255, 0.1)"
+          color: colors.grid
         }
       },
       axisLabel: {
-        color: "#94a3b8", // slate-400
+        color: colors.subtext,
         fontSize: isMobile ? 9 : 12,
         rotate: isMobile ? 45 : 0,
-        interval: isMobile ? 'auto' : 0
+        interval: isMobile ? 'auto' : 0,
+        fontWeight: 'bold'
       }
     },
     yAxis: [
@@ -87,23 +102,26 @@ const renderChart = () => {
         type: "value",
         name: isMobile ? "" : "Total Fans",
         nameTextStyle: {
-          color: "#94a3b8", // slate-400
-          fontSize: isMobile ? 10 : 12
+          color: colors.subtext,
+          fontSize: isMobile ? 10 : 12,
+          fontWeight: 'bold'
         },
         splitLine: {
           lineStyle: {
-            color: "rgba(255, 255, 255, 0.05)"
+            color: colors.grid,
+            type: 'dashed'
           }
         },
         axisLabel: {
-          color: "#94a3b8", // slate-400
+          color: colors.subtext,
           fontSize: isMobile ? 9 : 12,
           formatter: (value: number) => {
             if (isMobile && value >= 1000) {
               return (value / 1000).toFixed(0) + 'K'
             }
             return value.toString()
-          }
+          },
+          fontWeight: 'bold'
         }
       },
       {
@@ -112,21 +130,23 @@ const renderChart = () => {
         position: "right",
         alignTicks: true,
         nameTextStyle: {
-          color: "#94a3b8", // slate-400
-          fontSize: isMobile ? 10 : 12
+          color: colors.subtext,
+          fontSize: isMobile ? 10 : 12,
+          fontWeight: 'bold'
         },
         splitLine: {
           show: false
         },
         axisLabel: {
-          color: "#94a3b8", // slate-400
+          color: colors.subtext,
           fontSize: isMobile ? 9 : 12,
           formatter: (value: number) => {
             if (isMobile && value >= 1000) {
               return (value / 1000).toFixed(0) + 'K'
             }
             return value.toString()
-          }
+          },
+          fontWeight: 'bold'
         }
       }
     ],
@@ -136,13 +156,13 @@ const renderChart = () => {
         type: "line",
         smooth: true,
         data: props.chartData.totalFans,
-        lineStyle: { width: isMobile ? 2 : 3, color: "#3b82f6" }, // blue-500
-        itemStyle: { color: "#3b82f6" },
+        lineStyle: { width: isMobile ? 3 : 4, color: colors.turf },
+        itemStyle: { color: colors.turf },
         showSymbol: false,
         areaStyle: {
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            { offset: 0, color: "rgba(59, 130, 246, 0.3)" },
-            { offset: 1, color: "rgba(59, 130, 246, 0.0)" }
+            { offset: 0, color: "rgba(105, 192, 91, 0.2)" }, // turf green with opacity
+            { offset: 1, color: "rgba(105, 192, 91, 0.0)" }
           ])
         }
       },
@@ -152,10 +172,10 @@ const renderChart = () => {
         yAxisIndex: 1,
         data: props.chartData.dailyNewFans,
         itemStyle: {
-          color: "#a855f7", // purple-500
-          borderRadius: [6, 6, 0, 0]
+          color: colors.ura,
+          borderRadius: [4, 4, 0, 0]
         },
-        barWidth: isMobile ? '60%' : '70%'
+        barWidth: isMobile ? '60%' : '50%'
       }
     ]
   }
@@ -212,11 +232,9 @@ watch(
   padding: clamp(80px, 35vw, 120px) 0;
   text-align: center;
   color: #94a3b8; /* slate-400 */
-  border: 2px dashed rgba(255, 255, 255, 0.1);
+  border: 4px dashed #e2e8f0;
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.02);
+  background: #f8fafc;
+  font-weight: bold;
 }
 </style>
-
-
-
